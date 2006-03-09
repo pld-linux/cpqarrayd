@@ -2,7 +2,7 @@ Summary:	Cpqarrayd - SmartArray controllers monitoring
 Summary(pl):	Cpqarrayd - monitorowanie kontrolerów SmartArray
 Name:		cpqarrayd
 Version:	2.2
-Release:	0.3
+Release:	0.4
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.strocamp.net/opensource/compaq/downloads/%{name}-%{version}.tar.gz
@@ -14,6 +14,8 @@ URL:		http://www.strocamp.net/opensource/cpqarrayd.php
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	net-snmp-devel
+BuildRequires:	rpmbuild(macros) >= 1.228
+Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,6 +49,16 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/cpqarrayd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+/sbin/chkconfig --add cpqarrayd
+%service cpqarrayd restart "Compaq RAID Array Monitor"
+
+%preun
+if [ "$1" = "0" ]; then
+	%service -q %{name} stop
+	/sbin/chkconfig --del cpqarrayd
+fi
 
 %files
 %defattr(644,root,root,755)
