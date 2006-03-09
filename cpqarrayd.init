@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 #
 # cpqarrayd    Start/Stop Compaq Array monitor
 #
@@ -7,46 +7,51 @@
 #              and reports via syslog or traps
 # processname: cpqarrayd
 
-# Source function library.
+# Source function library
 . /etc/rc.d/init.d/functions
 
 # Get config.
 if [ -f /etc/sysconfig/cpqarrayd ]; then
-        . /etc/sysconfig/cpqarrayd
+	. /etc/sysconfig/cpqarrayd
 fi
-
-[ -f /usr/sbin/cpqarrayd ] || exit 0
 
 RETVAL=0
 
 # See how we were called.
 case "$1" in
-  start)
-        echo -n "Starting cpqarrayd: "
-        daemon /usr/sbin/cpqarrayd $CPQ_PARAMS
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/cpqarrayd
-        ;;
-  stop)
-        echo -n "Stopping cpqarrayd: "
-        killproc cpqarrayd
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/cpqarrayd
-        ;;
-  status)
-        status cpqarrayd
-        RETVAL=$?
-        ;;
-  restart|reload)
-        $0 stop
-        $0 start
-        RETVAL=$?
-        ;;
-  *)
-        echo "Usage: cpqarrayd {start|stop|status|restart|reload}"
-        exit 1
+start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/cpqarrayd ]; then
+		msg_starting cpqarrayd
+		daemon cpqarrayd $CPQ_PARAMS
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/cpqarrayd
+	else
+		msg_already_running cpqarrayd
+	fi
+	;;
+stop)
+	if [ -f /var/lock/subsys/cpqarrayd ]; then
+		# Stop daemons.
+		msg_stopping cpqarrayd
+		killproc cpqarrayd
+		rm -f /var/lock/subsys/cpqarrayd
+	else
+		msg_not_running cpqarrayd
+	fi
+	;;
+restart|reload|force-reload)
+	$0 stop
+	$0 start
+	RETVAL=$?
+	;;
+status)
+	status cpqarrayd
+	RETVAL=$?
+	;;
+*)
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL

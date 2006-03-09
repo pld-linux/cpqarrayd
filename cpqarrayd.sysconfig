@@ -1,2 +1,4 @@
-# specify startup options here
-CPQ_PARAMS=""
+# Customized settings for cpqarrayd
+
+# Specify startup options here.
+#CPQ_PARAMS=""
