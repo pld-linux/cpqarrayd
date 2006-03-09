@@ -44,7 +44,7 @@ stop)
 		msg_not_running cpqarrayd
 	fi
 	;;
-restart|reload|force-reload)
+restart|force-reload)
 	$0 stop
 	$0 start
 	RETVAL=$?
@@ -54,7 +54,7 @@ status)
 	RETVAL=$?
 	;;
 *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
 	exit 3
 esac
 
