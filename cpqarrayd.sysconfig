@@ -1,4 +1,9 @@
-# Customized settings for cpqarrayd
+# Customized settings for Compaq Array monitor cpqarrayd
 
-# Specify startup options here.
+# Specify a host that should receive traps.
+# You can specify this option at max ten times.
+# The host is in the format host:port.
+#TRAP_DESTINATIONS="snmphost"
+
+# Specify additional startup options here.
 #CPQ_PARAMS=""

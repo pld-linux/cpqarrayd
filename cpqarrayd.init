@@ -10,19 +10,23 @@
 # Source function library
 . /etc/rc.d/init.d/functions
 
+CPQ_PARAMS=""
+
 # Get config.
 if [ -f /etc/sysconfig/cpqarrayd ]; then
 	. /etc/sysconfig/cpqarrayd
 fi
 
 RETVAL=0
-
 # See how we were called.
 case "$1" in
 start)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/cpqarrayd ]; then
 		msg_starting cpqarrayd
+		for host in $TRAP_DESTINATIONS; do
+			CPQ_PARAMS="$CPQ_PARAMS -t $host"
+		done
 		daemon cpqarrayd $CPQ_PARAMS
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/cpqarrayd
