@@ -1,5 +1,5 @@
 Summary:	Cpqarrayd - SmartArray controllers monitoring
-Summary(pl):	Cpqarrayd - monitorowanie kontrolerÛw SmartArray
+Summary(pl.UTF-8):   Cpqarrayd - monitorowanie kontroler√≥w SmartArray
 Name:		cpqarrayd
 Version:	2.2
 Release:	0.4
@@ -22,9 +22,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Cpqarrayd monitors SmartArray controllers for you and notifies by
 sending SNMP traps and via syslog.
 
-%description -l pl
+%description -l pl.UTF-8
 Cpqarrayd monitoruje kontrolery SmartArray i powiadamia przez
-wysy≥anie pu≥apek SNMP oraz sysloga.
+wysy≈Çanie pu≈Çapek SNMP oraz sysloga.
 
 %prep
 %setup -q
