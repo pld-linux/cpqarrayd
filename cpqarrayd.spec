@@ -1,5 +1,5 @@
 Summary:	Cpqarrayd - SmartArray controllers monitoring
-Summary(pl.UTF-8):   Cpqarrayd - monitorowanie kontrolerów SmartArray
+Summary(pl.UTF-8):	Cpqarrayd - monitorowanie kontrolerów SmartArray
 Name:		cpqarrayd
 Version:	2.2
 Release:	0.4
