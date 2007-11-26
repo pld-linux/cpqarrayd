@@ -43,6 +43,18 @@ stop() {
 	fi
 }
 
+condrestart() {
+	if [ -f /var/lock/subsys/cpqarrayd ]; then
+		stop
+		start
+	else
+		if [ $1 -ne 0 ]; then
+			msg_not_running cpqarrayd
+		fi
+		RETVAL=$1
+	fi
+}
+
 RETVAL=0
 # See how we were called.
 case "$1" in
@@ -56,12 +68,18 @@ restart|force-reload)
 	stop
 	start
 	;;
+try-restart)
+	condrestart 0
+	;;
+force-reload)
+	condrestart 7
+	;;
 status)
 	status cpqarrayd
 	RETVAL=$?
 	;;
 *)
-	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|try-restart|force-reload|status}"
 	exit 3
 esac
 
