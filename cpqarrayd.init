@@ -64,7 +64,7 @@ start)
 stop)
 	stop
 	;;
-restart|force-reload)
+restart)
 	stop
 	start
 	;;
