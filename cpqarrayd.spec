@@ -1,12 +1,12 @@
 Summary:	Cpqarrayd - SmartArray controllers monitoring
 Summary(pl.UTF-8):	Cpqarrayd - monitorowanie kontrolerów SmartArray
 Name:		cpqarrayd
-Version:	2.2
-Release:	2
+Version:	2.3
+Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.strocamp.net/opensource/compaq/downloads/%{name}-%{version}.tar.gz
-# Source0-md5:	d287d1ad9317443063aff1098f7bc4f4
+# Source0-md5:	55421afe4817863efab45c59a9486a60
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-headers.patch
