@@ -56,27 +56,27 @@ condrestart() {
 RETVAL=0
 # See how we were called.
 case "$1" in
-start)
+  start)
 	start
 	;;
-stop)
+  stop)
 	stop
 	;;
-restart)
+  restart)
 	stop
 	start
 	;;
-try-restart)
+  try-restart)
 	condrestart 0
 	;;
-force-reload)
+  force-reload)
 	condrestart 7
 	;;
-status)
+  status)
 	status cpqarrayd
 	RETVAL=$?
 	;;
-*)
+  *)
 	msg_usage "$0 {start|stop|restart|try-restart|force-reload|status}"
 	exit 3
 esac
