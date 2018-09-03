@@ -1,0 +1,64 @@
+--- cpqarrayd-2.3/status.c.orig	2007-12-03 18:06:22.000000000 +0100
++++ cpqarrayd-2.3/status.c	2018-09-03 10:37:05.375891671 +0200
+@@ -140,8 +140,7 @@
+ 		   "problem sending snmp trap (sendtrap() returned %d)\n",
+ 		   trap_stat);
+ 	    if (opts.debug) {
+-	      printf("DEBUG: Problem sending snmp trap",
+-		     "(sendtrap() returned %d)\n", 
++	      printf("DEBUG: Problem sending snmp trap (sendtrap() returned %d)\n", 
+ 		     trap_stat);
+ 	    }
+ 	  }
+@@ -167,8 +168,7 @@
+ 		   "problem sending snmp trap (sendtrap() returned %d)\n",
+ 		   trap_stat);
+ 	    if (opts.debug) {
+-	      printf("DEBUG: Problem sending snmp trap ",
+-		     "(sendtrap() returned %d)\n",
++	      printf("DEBUG: Problem sending snmp trap (sendtrap() returned %d)\n",
+ 		     trap_stat);
+ 	    }
+ 	  }
+@@ -215,17 +217,16 @@
+ 		 event.detail.logstatchange.logicaldrivenumber,
+ 		 logicaldrivestatusstr[event.detail.logstatchange.newlogicaldrivestate]);
+ 	status = event.detail.logstatchange.newlogicaldrivestate;
+-	syslog(LOG_WARNING, statusmsg);
++	syslog(LOG_WARNING, "%s", statusmsg);
+ 	if (opts.debug) {
+-	  printf (statusmsg);
++	  puts (statusmsg);
+ 	}
+ 	if (trap_stat = sendtrap(opts, "public", status, statusmsg)) {
+ 	  syslog(LOG_WARNING, 
+ 		 "problem sending snmp trap (sendtrap() returned %d)\n",
+ 		 trap_stat);
+ 	  if (opts.debug) {
+-	    printf("DEBUG: Problem sending snmp trap",
+-		   "(sendtrap() returned %d)\n", 
++	    printf("DEBUG: Problem sending snmp trap (sendtrap() returned %d)\n", 
+ 		   trap_stat);
+ 	  }
+ 	}
+@@ -234,17 +237,16 @@
+ 		 ctrls_found[ctrl_cntr].devicefile,
+ 		 event.mesgstring);
+ 	status = 255;
+-	syslog(LOG_WARNING, statusmsg);
++	syslog(LOG_WARNING, "%s", statusmsg);
+ 	if (opts.debug) {
+-	  printf (statusmsg);
++	  puts (statusmsg);
+ 	}
+ 	if (trap_stat = sendtrap(opts, "public", status, statusmsg)) {
+ 	  syslog(LOG_WARNING, 
+ 		 "problem sending snmp trap (sendtrap() returned %d)\n",
+ 		 trap_stat);
+ 	  if (opts.debug) {
+-	    printf("DEBUG: Problem sending snmp trap",
+-		   "(sendtrap() returned %d)\n", 
++	    printf("DEBUG: Problem sending snmp trap (sendtrap() returned %d)\n", 
+ 		   trap_stat);
+ 	  }
+ 	}

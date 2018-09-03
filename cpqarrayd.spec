@@ -2,7 +2,7 @@ Summary:	Cpqarrayd - SmartArray controllers monitoring
 Summary(pl.UTF-8):	Cpqarrayd - monitorowanie kontrolerów SmartArray
 Name:		cpqarrayd
 Version:	2.3
-Release:	5
+Release:	6
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.strocamp.net/opensource/compaq/downloads/%{name}-%{version}.tar.gz
@@ -10,6 +10,7 @@ Source0:	http://www.strocamp.net/opensource/compaq/downloads/%{name}-%{version}.
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-headers.patch
+Patch1:		format-security.patch
 URL:		http://www.strocamp.net/opensource/cpqarrayd.php
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -29,6 +30,7 @@ wysyłanie pułapek SNMP oraz sysloga.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__aclocal}
